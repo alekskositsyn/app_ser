@@ -9,6 +9,7 @@ from clients.models import Client
 class SubscriptionsView(ReadOnlyModelViewSet):
     queryset = Subscription.objects.all().prefetch_related(
         'plan',
+        'services',
         Prefetch(
             'client',
             queryset=Client.objects.all().select_related('user').only('company_name',
